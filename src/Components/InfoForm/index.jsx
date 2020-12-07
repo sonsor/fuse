@@ -1,29 +1,16 @@
 import { useContext} from 'react'
-import { DatePicker, Form, Input, Button, Checkbox } from 'antd';
+import { DatePicker, Form, Input, Button } from 'antd';
 import InfoContext from '../../Context/InforFormContext'
-
-const layout = {
-    labelCol: {
-        span: 8,
-    },
-    wrapperCol: {
-        span: 16,
-    },
-};
-const tailLayout = {
-    wrapperCol: {
-        offset: 8,
-        span: 16,
-    },
-};
-
 
 export const InfoForm = () => {
 
     const formInfo = useContext(InfoContext)
 
     const onFinish = (values) => {
-        console.log('Success:', values, formInfo);
+        console.log('Success:', {
+            name: formInfo.name,
+            dateOfBirth: formInfo.dateOfBirth
+        });
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -32,19 +19,36 @@ export const InfoForm = () => {
 
     return (
         <Form
-            {...layout}
             name="basic"
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
         >
-            <Form.Item label="Name">
+            <Form.Item
+                label="Name"
+                name="name"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input your name!',
+                    },
+                ]}
+            >
             <Input
                 value={formInfo.name}
                 onChange={e => formInfo.setName(e.target.value)}
             />
             </Form.Item>
 
-            <Form.Item label="Date Of Birth">
+            <Form.Item
+                label="Date Of Birth"
+                name="dateOfBirth"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input your date of birth!',
+                    },
+                ]}
+            >
             <DatePicker
                 value={formInfo.dateOfBirth}
                 onChange={(e, value) => formInfo.setDateOfBirth(e)}
@@ -52,7 +56,7 @@ export const InfoForm = () => {
             </Form.Item>
 
 
-            <Form.Item {...tailLayout}>
+            <Form.Item>
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
