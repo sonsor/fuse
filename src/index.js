@@ -7,12 +7,8 @@ import 'antd/dist/antd.css';
 ReactDOM.render(
   <React.StrictMode>
     <App />
-<<<<<<< HEAD
       <h1>World Hello</h1>
-=======
-  <h1>hello world</h1>
->>>>>>> 17f0fe9d3a79ef148e0d7a50ebb07a8901a79185
-  </React.StrictMode>,
+ </React.StrictMode>,
   document.getElementById('root')
 );
 
